@@ -1,0 +1,11 @@
+* Testing
+https://www.developerfusion.com/article/84444/unit-testing-in-ruby/
+
+Test::Unit
+ruby -I . test/test_add.rb
+* Emacs setup
+Code completion
+https://superuser.com/questions/231384/how-to-get-code-completion-in-emacs
+
+https://stackoverflow.com/questions/20729873/recommendation-for-emacs-ruby-setup/20733563#20733563
+https://worace.works/2016/06/07/getting-started-with-emacs-for-ruby/
