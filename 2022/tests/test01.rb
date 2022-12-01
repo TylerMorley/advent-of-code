@@ -10,10 +10,7 @@ class Part1 < Test::Unit::TestCase
     assert_equal expected_len, elves.length
 
     assert_equal 3, elves[0].length
-    assert_equal 1, elves[1].length
     assert_equal 2, elves[2].length
-    assert_equal 3, elves[3].length
-    assert_equal 1, elves[4].length
   end
 
   def test_get_calories
@@ -22,7 +19,29 @@ class Part1 < Test::Unit::TestCase
     day_one = Day01.new
     calories = day_one.get_calories(elves)
 
+    exp_length = 5
+    assert_equal exp_length, calories.length
+  end
+
+  def test_get_calories_top1
+    day_one = Day01.new
+    input_calories = [6000, 4000, 11000, 24000, 10000]
+
+    top_calories = day_one.get_calories_top1(input_calories)
+ 
     expected = 24000
-    assert_equal expected, calories
+    assert_equal expected, top_calories
+  end
+end
+
+class Part2 < Test::Unit::TestCase
+  def test_get_calories_top3
+    input_calories = [6000, 4000, 11000, 24000, 10000]
+    day_one = Day01.new
+
+    top_three = day_one.get_calories_top3(input_calories)
+
+    expected = 45000
+    assert_equal expected, top_three
   end
 end

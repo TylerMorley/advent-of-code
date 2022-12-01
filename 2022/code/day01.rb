@@ -32,11 +32,33 @@ class Day01
       elves_calories.append(elf_calories)
     end
     
-    return elves_calories.max
+    return elves_calories
+  end
+
+  def get_calories_top1 (calories_list)
+    calories_list.max
+  end
+
+  def get_calories_top3 (calories_list)
+    top_three = []
+    for i in 0..2
+      top_elf = calories_list.max
+      top_three.append(top_elf)
+      calories_list.delete(top_elf)
+    end
+    return top_three.sum
   end
 end
-    
-day_one = Day01.new
-input = day_one.get_elves('inputs/input01.txt')
-output = day_one.get_calories(input)
-print output.to_s + "\n"
+
+if __FILE__ == $0    
+  day_one = Day01.new
+  input = day_one.get_elves('inputs/input01.txt')
+  calories_list = day_one.get_calories(input)
+
+  part1 = day_one.get_calories_top1(calories_list)
+  print "Part 1:\n"
+  print part1.to_s + "\n"
+  part2 = day_one.get_calories_top3(calories_list)
+  print "Part 2:\n"
+  print part2.to_s + "\n"
+end
