@@ -8,18 +8,26 @@ class Day02
     return guide
   end
 
-  def decode_1 (column)
-    codes = {'A':'rock', 'B':'paper', 'C':'scissors', 'X':'rock', 'Y':'paper', 'Z':'scissors'}
-    return codes[column.to_sym]
-  end
+  def decode (column, mode)
+    codes = nil
 
-  def decode_2 (column)
-    codes = {'A':'rock', 'B':'paper', 'C':'scissors', 'X':'lose', 'Y':'tie', 'Z':'win'}
+    if mode == 'opp'
+      codes = {'A':'rock', 'B':'paper', 'C':'scissors'}
+    elsif mode == 'me_1'
+      codes = {'X':'rock', 'Y':'paper', 'Z':'scissors'}
+    elsif mode == 'me_2'
+      codes = {'X':'lose', 'Y':'tie', 'Z':'win'}
+    end
+
     return codes[column.to_sym]
   end
 
   def apply_rules (my_choice, opponent_choice, mode)
-    rules = {'rock': {'rock':'tie', 'paper': 'win', 'scissors':'lose'}, 'paper': {'rock':'lose', 'paper':'tie', 'scissors':'win'}, 'scissors': {'rock':'win', 'paper':'lose', 'scissors':'tie'}}
+    rules = {
+      'rock': {'rock':'tie', 'paper': 'win', 'scissors':'lose'}, 
+      'paper': {'rock':'lose', 'paper':'tie', 'scissors':'win'}, 
+      'scissors': {'rock':'win', 'paper':'lose', 'scissors':'tie'}
+    }
     
     output = nil
 
@@ -41,22 +49,19 @@ class Day02
   def calculate_round (codes, mode)
     opponent_code = codes[0]
     my_code = codes[1]
-    score = nil
+    opponent_choice = decode(opponent_code, 'opp')
 
+    my_choice = nil
+    outcome = nil
     if mode == '1'
-      opponent_choice = decode_1(opponent_code.to_sym)
-      my_choice = decode_1(my_code.to_sym)
+      my_choice = decode(my_code, 'me_1')
       outcome = apply_rules(my_choice, opponent_choice, mode)
-      score = get_score(my_choice, outcome)
     elsif mode == '2'
-      opponent_choice = decode_2(opponent_code.to_sym)
-      outcome = decode_2(my_code.to_sym)
+      outcome = decode(my_code, 'me_2')
       my_choice = apply_rules(outcome, opponent_choice, mode)
-      score = get_score(my_choice, outcome)
     end
 
     score = get_score(my_choice, outcome)
-
     return score
   end
 

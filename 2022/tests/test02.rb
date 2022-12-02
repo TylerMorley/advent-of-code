@@ -15,10 +15,18 @@ class Part1 < Test::Unit::TestCase
     day2 = Day02.new
 
     column = 'A'
-    choice = day2.decode_1(column)
+    mode = 'opp'
+    choice = day2.decode(column, mode)
     expected = 'rock'
 
     assert_equal expected, choice
+
+    column2 = 'Y'
+    mode2 = 'me_1'
+    choice2 = day2.decode(column2, mode2)
+    expected2 = 'paper'
+
+    assert_equal expected2, choice2
   end
 
   def test_apply_rules
@@ -73,7 +81,8 @@ class Part2 < Test::Unit::TestCase
   def test_decode_2
     day2 = Day02.new
     column = 'Y'
-    choice = day2.decode_2(column)
+    mode = 'me_2'
+    choice = day2.decode(column, mode)
     expected = 'tie'
 
     assert_equal expected, choice
