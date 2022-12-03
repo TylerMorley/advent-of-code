@@ -76,3 +76,55 @@ class Part1 < Test::Unit::TestCase
     assert_equal expected, sum_priorities
   end
 end
+class Part2 < Test::Unit::TestCase
+  def test_group_rucksacks
+    day3 = Day03.new
+    rucksacks = ['vJrwpWtwJgWrhcsFMMfFFhFp', 
+                 'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 
+                 'PmmdzqPrVvPwwTWBwg', 
+                 'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn', 
+                 'ttgJtRGJQctTZtZT', 
+                 'CrZsJsPPZsGzwwsLwLmpwMDw'
+               ]
+
+    groups = day3.group_rucksacks(rucksacks)
+    expected = [['vJrwpWtwJgWrhcsFMMfFFhFp', 
+                 'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 
+                 'PmmdzqPrVvPwwTWBwg'], 
+                ['wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn', 
+                 'ttgJtRGJQctTZtZT', 
+                 'CrZsJsPPZsGzwwsLwLmpwMDw']
+               ]
+    
+    assert_equal expected, groups
+  end
+
+  def test_get_badge
+    day3 = Day03.new
+    group = ['vJrwpWtwJgWrhcsFMMfFFhFp', 
+              'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 
+              'PmmdzqPrVvPwwTWBwg'
+             ]
+    
+    badge = day3.get_badge(group)
+    expected = 'r'
+
+    assert_equal expected, badge
+  end
+
+  def test_group_priorities
+    day3 = Day03.new
+    groups = [['vJrwpWtwJgWrhcsFMMfFFhFp', 
+               'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL', 
+               'PmmdzqPrVvPwwTWBwg'], 
+              ['wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn', 
+               'ttgJtRGJQctTZtZT', 
+               'CrZsJsPPZsGzwwsLwLmpwMDw']
+             ]
+    
+    sum = day3.group_priorities(groups)
+    expected = 70
+    
+    assert_equal expected, sum
+  end
+end

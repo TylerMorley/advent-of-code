@@ -19,6 +19,15 @@ class Day03
     return compartments
   end
 
+  def group_rucksacks (rucksacks)
+    groups = Array.new
+    while rucksacks.length > 0 do
+      group = rucksacks.shift 3
+      groups.append(group)
+    end
+    return groups
+  end
+
   def find_error (rucksack)
     first = rucksack[0].chars.to_set
     second = rucksack[1].chars.to_set
@@ -31,11 +40,29 @@ class Day03
     return priority
   end
 
+  def get_badge (group)
+    first = group[0].chars.to_set
+    second = group[1].chars.to_set
+    third = group[2].chars.to_set
+    badge = first.intersection(second).intersection(third)
+    return badge.to_a[0]
+  end
+
   def sum_priorities (rucksacks)
     sum = 0
     rucksacks.each do |sack|
       error = find_error(sack)
       priority = prioritize(error)
+      sum += priority
+    end
+    return sum
+  end
+
+  def group_priorities (groups)
+    sum = 0
+    groups.each do |group|
+      badge = get_badge(group)
+      priority = prioritize(badge)
       sum += priority
     end
     return sum
@@ -50,4 +77,9 @@ if __FILE__ == $0
   part1 = day3.sum_priorities(compartmented)
   print "Part 1:\n"
   print part1.to_s + "\n"
+
+  groups = day3.group_rucksacks(rucksacks)
+  part2 = day3.group_priorities(groups)
+  print "Part 2:\n"
+  print part2.to_s + "\n"
 end
