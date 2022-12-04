@@ -1,5 +1,4 @@
 #!/usr/bin/ruby
-require 'set'
 
 class Day04
   def get_assignments (filename)
@@ -15,7 +14,7 @@ class Day04
     return assignments
   end
 
-  def check_pair (pair)
+  def check_containment (pair)
     first = pair[0]
     second = pair[1]
 
@@ -32,7 +31,30 @@ class Day04
   def count_containments (assignments)
     count = 0
     assignments.each do |pair|
-      if check_pair(pair)
+      if check_containment(pair)
+        count += 1
+      end
+    end
+    return count
+  end
+
+  def check_overlap (pair)
+    first = pair[0]
+    second = pair[1]
+
+    output = true
+    if first[0] < second[0] and first[1] < second[0]
+      output = false
+    elsif first[0] > second[1] and first[1] > second[1]
+      output = false
+    end
+    return output
+  end
+
+  def count_overlaps (assignments)
+    count = 0
+    assignments.each do |pair|
+      if check_overlap(pair)
         count += 1
       end
     end
@@ -47,4 +69,8 @@ if __FILE__ == $0
   part1 = day4.count_containments(assignments)
   print "Part 1:\n"
   print part1.to_s + "\n"
+
+  part2 = day4.count_overlaps(assignments)
+  print "Part 2:\n"
+  print part2.to_s + "\n"
 end
