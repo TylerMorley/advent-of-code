@@ -80,11 +80,23 @@ class Day05
     return stacks
   end
 
-  def execute_procedure(stacks, procedure)
-    index = 1
+  def execute_step_2(stacks, step)
+    quantity = step[0]
+    origin = step[1]-1
+    destination = step[2]-1
+
+    temp = stacks[origin].pop(quantity)
+    stacks[destination] += temp
+    return stacks
+  end
+
+  def execute_procedure(stacks, procedure, mode)
     procedure.each do |step|
-      index += 1
-      stacks = execute_step(stacks, step)
+      if mode == 1
+        stacks = execute_step(stacks, step)
+      elsif mode == 2
+        stacks = execute_step_2(stacks, step)
+      end
     end
     return stacks
   end
@@ -92,7 +104,7 @@ class Day05
   def get_top_crates(stacks)
     output = ''
     stacks.each do |stack|
-      output += stack.pop()
+        output += stack.pop()
     end
     return output
   end
@@ -102,10 +114,16 @@ if __FILE__ == $0
   day5 = Day05.new
   input = day5.get_input('inputs/realinput05.txt')
   stacks = day5.to_stacks(input[0])
+  stacks2 = stacks.map{|x| x.dup}
   procedure = input[1]
 
-  moved_stacks = day5.execute_procedure(stacks, procedure)
+  moved_stacks = day5.execute_procedure(stacks, procedure, 1)
   part1 = day5.get_top_crates(moved_stacks)
   print "Part 1:\n"
   print part1.to_s + "\n"
+
+  moved_stacks2 = day5.execute_procedure(stacks2, procedure, 2)
+  part2 = day5.get_top_crates(moved_stacks2)
+  print "Part 2:\n"
+  print part2.to_s + "\n"
 end

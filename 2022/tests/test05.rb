@@ -111,7 +111,7 @@ class Part1 < Test::Unit::TestCase
                  ['M'],
                  ['P', 'D', 'N', 'Z']
                 ]
-    output = day5.execute_procedure(stacks, procedure)
+    output = day5.execute_procedure(stacks, procedure, 1)
     assert_equal expected, output
   end
 
@@ -126,3 +126,39 @@ class Part1 < Test::Unit::TestCase
     assert_equal expected, output
   end
 end  
+
+class Part2 < Test::Unit::TestCase
+  def test_execute_step_2
+    day5 = Day05.new
+    input = [['Z', 'N'],
+             ['M', 'C', 'D'],
+             ['P']
+            ]
+    step1 = [2, 2, 1]
+    output = day5.execute_step_2(input, step1)
+    expected = [['Z', 'N', 'C', 'D'],
+                ['M'],
+                ['P']
+               ]
+    assert_equal expected, output
+  end
+
+  def test_execute_procedure_2
+    day5 = Day05.new
+    input = [['Z', 'N'],
+             ['M', 'C', 'D'],
+             ['P']
+            ]
+    procedure = [[1, 2, 1],
+                 [3, 1, 3],
+                 [2, 2, 1],
+                 [1, 1, 2]
+                ]
+    expected = [['M'],
+                ['C'],
+                ['P', 'Z', 'N', 'D']
+               ]
+    output = day5.execute_procedure(input, procedure, 2)
+    assert_equal expected, output
+  end
+end
