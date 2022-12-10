@@ -104,7 +104,7 @@ class Part1 < Test::Unit::TestCase
 
   def test_moves
     day9 = Day09.new
-        input = [['R', 4],
+    input = [['R', 4],
              ['U', 4],
              ['L', 3],
              ['D', 1],
@@ -121,6 +121,61 @@ class Part1 < Test::Unit::TestCase
     exp_knots = [[2,2], [1,2]]
     exp_num_visited = 13
     expected = [exp_knots, exp_num_visited]
+    assert_equal expected, output
+  end
+end
+class Part2 < Test::Unit::TestCase
+  def test_moves
+    day9 = Day09.new
+    input = [['R', 4],
+             ['U', 4],
+             ['L', 3],
+             ['D', 1],
+             ['R', 4],
+             ['D', 1],
+             ['L', 5],
+             ['R', 2]
+            ]
+    knots = Array.new(10).map{|x| [0,0]}
+
+    output = day9.moves(knots, input)
+    exp_knots = [[2,2], [1,2], [2,2], [3,2], [2,2], [1,1], [0,0], [0,0], [0,0], [0,0]]
+    exp_num_visited = 1
+    expected = [exp_knots, exp_num_visited]
+    assert_equal expected, output
+
+    input2 = [['R', 5],
+              ['U', 8],
+              ['L', 8],
+              ['D', 3],
+              ['R', 17],
+              ['D', 10],
+              ['L', 25],
+              ['U', 20]
+             ]
+
+    knots = Array.new(10).map{|x| [0,0]}
+
+    output = day9.moves(knots, input2)
+    exp_knots = [[-11,15], [-11,14], [-11,13], [-11,12], [-11,11], [-11,10], [-11,9], [-11,8], [-11,7], [-11,6]]
+    exp_num_visited = 36
+    expected = [exp_knots, exp_num_visited]
+    assert_equal expected, output
+  end
+
+  def test_move
+    day9 = Day09.new
+    input = ['R', 4]
+    knots = Array.new(10).map{|x| [0,0]}
+    visited = Set.new
+
+    output = day9.move(knots, input, visited)[0]
+    expected = [[4, 0], [3,0], [2,0], [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [0,0]]
+    assert_equal expected, output
+    
+    input = ['U', 4]
+    output = day9.move(knots, input, visited)[0]
+    expected = [[4, 4], [4,3], [4,2], [3,2], [2,2], [1,1], [0,0], [0,0], [0,0], [0,0]]
     assert_equal expected, output
   end
 end

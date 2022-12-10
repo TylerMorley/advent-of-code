@@ -50,18 +50,20 @@ class Day09
   end
 
   def move(knots, movement, visited)
-    head = knots[0]
-    tail = knots[1]
-    
     direction = movement[0]
     distance = movement[1]
+
     for i in 1..distance
-      head = move_head(head, direction)
-      tail = move_tail(head, tail)
-      visited = visit(visited, tail)
+      knots[0] = move_head(knots[0], direction)
+      prev_knot = knots[0]
+      for j in 1..knots.length-1
+        knots[j] = move_tail(prev_knot, knots[j])
+        prev_knot = knots[j]
+      end
+      visited = visit(visited, knots[-1])
     end
 
-    return [[head, tail], visited]
+    return [knots, visited]
   end
 
   def visit(visited, tail)
@@ -85,13 +87,14 @@ end
 if __FILE__ == $0    
   day9 = Day09.new
   input = day9.get_input('inputs/realinput09.txt')
-  knots = [[0,0],[0,0]]
 
+  knots = [[0,0],[0,0]]
   part1 = day9.moves(knots, input)[1]
   print "Part 1:\n"
   print part1.to_s + "\n"
 
-  # part2 = day6.get_sop_marker(input, distinct_chars)
-  # print "Part 2:\n"
-  # print part2.to_s + "\n"
+  knots2 = Array.new(10).map{|x| [0,0]}
+  part2 = day9.moves(knots2, input)[1]
+  print "Part 2:\n"
+  print part2.to_s + "\n"
 end
