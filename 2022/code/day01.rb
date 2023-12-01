@@ -6,7 +6,7 @@ class Day01
     elves_str = lines.split("\n\n").map{|elf| elf.split("\n")}
     elves = Array.new(0)
 
-    for elf_str in elves_str
+    elves_str.each do |elf_str|
       elf = elf_str.map{|food_str| food_str.to_i}
 
       elves.append(elf)
