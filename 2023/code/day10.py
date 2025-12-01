@@ -85,19 +85,31 @@ def hasOddCrosses(pipes, tile):
 
     count = 0
     count += above.count('-')
-    count += above.count('F')
-    count += above.count('7')
-    count += above.count('J')
-    count += above.count('L')
+    angles = dict()
+    angles['F'] = above.count('F')
+    angles['7'] = above.count('7')
+    angles['J'] = above.count('J')
+    angles['L'] = above.count('L')
+    if angles['F'] != angles['7']:
+        minimum = min(list(angles.values()))
+        angles = {k:v-minimum for k,v in angles.items()}
+        if angles['F'] > 0:
+            if angles['J'] > 0:
+                count += 1
+        elif angles['7'] > 0:
+            if angles['L'] > 0:
+                count +=1
 
-    if count % 4 != 0:
+    if count % 2 != 0:
         return True
     return False
 
 def countInternals(pipes):
+    print('new map')
     count = 0
     for tile_key in list(pipes.keys()):
         if pipes[tile_key] == '.' and hasOddCrosses(pipes, tile_key):
+            print(tile_key)
             count += 1
     return count
 
@@ -107,3 +119,8 @@ if __name__ == '__main__':
     loop_length = getMainLoop(pipes)
     farthest = len(loop_length) // 2
     print(f'Part 1: {farthest}')
+    
+    pipes = getPipes(filename)
+    #no_junk = removeJunk(pipes)
+    #num_internals = countInternals(no_junk)
+    #print(f'Part 2: {num_internals}')

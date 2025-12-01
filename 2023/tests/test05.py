@@ -40,18 +40,21 @@ class PartOne(unittest.TestCase):
                    'temperature-to-humidity': [[0, 69, 1], [1, 0, 69]], 
                    'humidity-to-location': [[60, 56, 37], [56, 93, 4]]
                    }
-        record = dict()
+
         seed = 79
-        location = day05.seedToLocation(almanac, record, seed)
+        location = day05.seedToLocation(almanac, dict(), seed)
         self.assertEqual(location, 82)
+
         seed = 14
-        location = day05.seedToLocation(almanac, seed)
+        location = day05.seedToLocation(almanac, dict(), seed)
         self.assertEqual(location, 43)
+
         seed = 55
-        location = day05.seedToLocation(almanac, seed)
+        location = day05.seedToLocation(almanac, dict(), seed)
         self.assertEqual(location, 86)
+
         seed = 13
-        location = day05.seedToLocation(almanac, seed)
+        location = day05.seedToLocation(almanac, dict(), seed)
         self.assertEqual(location, 35)
 
 class PartTwo(unittest.TestCase):
