@@ -39,3 +39,21 @@ class PartOne(unittest.TestCase):
         total_joltage = day03.getTotalJoltage(banks)
         expected = 357
         self.assertEqual(total_joltage, expected)
+
+class PartTwo(unittest.TestCase):
+    def test_getLargestBatteries2(self):
+        bank = [9,8,7,6,5,4,3,2,1,1,1,1,1,1,1]
+        safety_override = True
+        largest = day03.getLargestBatteries(bank, safety_override)
+        expected = 987654321111
+        self.assertEqual(largest, expected)
+        
+    def test_getTotalJoltage2(self):
+        banks = [[9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1],
+                 [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9],
+                 [2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 7, 8],
+                 [8, 1, 8, 1, 8, 1, 9, 1, 1, 1, 1, 2, 1, 1, 1]]
+        safety_override = True
+        total_joltage = day03.getTotalJoltage(banks, safety_override)
+        expected = 3121910778619
+        self.assertEqual(total_joltage, expected)
